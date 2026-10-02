@@ -1,5 +1,11 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import views
+
+
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
+
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -27,6 +33,14 @@ class CategoryView(views.APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+class CategoryGenericListCreateView(ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategoryListSerializer
+    
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return CategoryCreateSerializer
+        return super().get_serializer_class()
     
 
 class CategoryDetailUpdateView(views.APIView):
@@ -66,10 +80,44 @@ class CategoryDetailUpdateView(views.APIView):
     
     
         
-        
+class CategoryGenericRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategoryListSerializer
+    
+    def get_serializer_class(self):
+        if self.request.method in ['PUT', 'PATCH']:
+            return CategoryUpdateSerializer
+        return super().get_serializer_class()
+
 
     
+# List, Create   ------------------------>ListCreateAPIView
+# pk get, update, delete  --------------->RetrieveUpdateDestroyAPIView baza 1
+
+
+
+
+
+class CategoryListAPIView(ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategoryListSerializer
     
+class CategoryCreateAPIView(CreateAPIView):
+    serializer_class = CategoryCreateSerializer
+    
+
+class CategoryRetrieveAPIView(RetrieveAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategoryListSerializer
+    
+class CategoryUpdateAPIView(UpdateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategoryUpdateSerializer
+    
+
+class CategoryDestroyAPIView(DestroyAPIView):
+    queryset = Category.objects.all()
+
 
         
         
