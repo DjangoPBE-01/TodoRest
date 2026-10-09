@@ -7,6 +7,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
+# from rest_framework.authtoken.models import Token
+
 from .serializers import RegisterUserSerializer
 
 # Create your views here.
@@ -17,48 +19,77 @@ class RegisterUser(CreateAPIView):
     serializer_class = RegisterUserSerializer
     
 
-class Login(APIView):
+
+
+
+
+# token auth
+# class LoginView(APIView):
+#     def post(self, request):
+#         email = request.data.get('email')
+#         password = request.data.get('password')
+#         user = authenticate(username=email, password=password)
+
+#         if user:
+#             token, _ = Token.objects.get_or_create(user=user)
+#             return Response({"token": token.key})
+#         return Response({"error": "Invalid credentials"}, status=400)
+
+
+# class LogoutView(APIView):
+#     permission_classes = [IsAuthenticated]
+
+#     def post(self, request):
+#         user = request.user
+#         user.auth_token.delete()
+#         return Response({"message": "Logged out successfully"})
+
+
+
+# session auth    
+
+# class Login(APIView):
     
-    def post(self, request, *args, **kwargs):
-        email = request.data.get('email')
-        password = request.data.get('password')
+#     def post(self, request, *args, **kwargs):
+#         email = request.data.get('email')
+#         password = request.data.get('password')
         
-        user = authenticate(request, email=email, password=password)
+#         user = authenticate(request, email=email, password=password)
         
-        if user is not None:
-            login(request, user)
-            return Response({'message': 'Login successful'}, status=status.HTTP_200_OK)
-        else:
-            return Response({'message': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+#         if user is not None:
+#             login(request, user)
+#             return Response({'message': 'Login successful'}, status=status.HTTP_200_OK)
+#         else:
+#             return Response({'message': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
         
 
 
 
-from django.conf import settings
-class Logout(APIView):
-    permission_classes = [IsAuthenticated]
+# from django.conf import settings
+# class Logout(APIView):
+#     permission_classes = [IsAuthenticated]
     
-    def post(self, request, *args, **kwargs):
+#     def post(self, request, *args, **kwargs):
        
-        user = request.user
+#         user = request.user
         
     
-        if request.session:
-            request.session.flush()  # Foydalanuvchiga tegishli barcha sessiya ma'lumotlarini o'chirish
+#         if request.session:
+#             request.session.flush()  # Foydalanuvchiga tegishli barcha sessiya ma'lumotlarini o'chirish
             
-        logout(request)
+#         logout(request)
         
-        # 2. Brauzer kukilarini tozalash uchun javob tayyorlaymiz
-        response = Response(
-            {'message': f'User {user.username} logged out successfully'}, 
-            status=status.HTTP_200_OK
-        )
+#         # 2. Brauzer kukilarini tozalash uchun javob tayyorlaymiz
+#         response = Response(
+#             {'message': f'User {user.username} logged out successfully'}, 
+#             status=status.HTTP_200_OK
+#         )
         
-        # Kuki nomlarini sozlamalardan olib o'chiramiz
-        response.delete_cookie(settings.SESSION_COOKIE_NAME)
-        response.delete_cookie('csrftoken')
+#         # Kuki nomlarini sozlamalardan olib o'chiramiz
+#         response.delete_cookie(settings.SESSION_COOKIE_NAME)
+#         response.delete_cookie('csrftoken')
         
-        return response
+#         return response
     
 
 
