@@ -12,7 +12,7 @@ class RegisterUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'email', 'password', 'confirm_password', 'first_name', 'last_name')
+        fields = ('id', 'email', 'password', 'confirm_password', 'first_name', 'last_name', 'is_active')
         
     
     
@@ -21,13 +21,17 @@ class RegisterUserSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Passwords do not match.")
         return data
 
-    def create(self, validated_data):
-        user = User.objects.create_user(
-            email=validated_data['email'],
-            password=validated_data['password'],
-            first_name=validated_data.get('first_name', ''),
-            last_name=validated_data.get('last_name', '')
-        )
+    # def create(self, validated_data):
+    #     user = User.objects.create_user(
+    #         email=validated_data['email'],
+    #         password=validated_data['password'],
+    #         is_active=False,  # Set the user as inactive until email verification
+    #         first_name=validated_data.get('first_name', ''),
+    #         last_name=validated_data.get('last_name', '')
+    #     )
         
-        return user
+    #     return user
+    
+    
+    
     

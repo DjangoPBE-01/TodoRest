@@ -3,6 +3,7 @@ from django.urls import path
 from apps.accounts.views import (
 # ExampleView, Example2View
     RegisterUser,
+    ConfirmEmailView,
 #     LoginView,
 #     LogoutView
 )
@@ -16,6 +17,7 @@ urlpatterns = [
     path('register/', RegisterUser.as_view(), name='register'),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('activation/verify-email/<int:pk>/', ConfirmEmailView.as_view(), name='confirm-email'),
     # path('login/', LoginView.as_view(), name='login'),
     # path('logout/', LogoutView.as_view(), name='logout'),
     # path('logout/', Logout.as_view(), name='logout'),
