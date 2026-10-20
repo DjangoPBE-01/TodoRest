@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -200,3 +201,7 @@ FRONTEND_URL = os.getenv(
     "FRONTEND_URL",
     "http://localhost:3000",
 )
+
+
+
+from .jazzmin_conf import JAZZMIN_SETTINGS # noqa
