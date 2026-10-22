@@ -11,7 +11,9 @@ from apps.todo.views import (
     CategoryCreateAPIView,
     CategoryRetrieveAPIView,
     CategoryUpdateAPIView,
-    CategoryDestroyAPIView
+    CategoryDestroyAPIView,
+    
+    ExampleView21
     )
 
 urlpatterns = [
@@ -28,5 +30,11 @@ urlpatterns = [
     urls.path('category-retrieve/<int:pk>/', CategoryRetrieveAPIView.as_view(), name='category-retrieve'),
     urls.path('category-update/<int:pk>/', CategoryUpdateAPIView.as_view(), name='category-update'),    
     urls.path('category-destroy/<int:pk>/', CategoryDestroyAPIView.as_view(), name='category-destroy'),
+    
+    
+    urls.path('example_get/',ExampleView21.as_view(), name='example-get'),
+    
+    
+    
 ]
 

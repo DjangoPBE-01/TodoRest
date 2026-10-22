@@ -9,7 +9,7 @@ from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView,
 
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.authentication import TokenAuthentication
+# from rest_framework.authentication import TokenAuthentication
 
 from apps.todo.serializers import CategoryListSerializer, CategoryCreateSerializer, CategoryUpdateSerializer
 from apps.todo.models import Category, Task
@@ -124,6 +124,37 @@ class CategoryDestroyAPIView(DestroyAPIView):
 
         
         
+        
+from .serializers import ExampleSerializer21
+class ExampleView21(views.APIView):
+    permission_classes = [IsAuthenticated]
+    
+    
+    
+    def get(self, request, *args, **kwargs):
+        data = {
+            "name": "Jamshidbek",
+            "age" : 21,
+            "email" :"jamshidbek04@gmail.com",
+            "hhhhh":89
+        }
+        serializer = ExampleSerializer21(data)
+        
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+
+    
+    
+    def post(self, request, *args, **kwargs):
+        
+        serializer = ExampleSerializer21(data=request.data)
+        if serializer.is_valid():
+            
+            return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
 
 
 
