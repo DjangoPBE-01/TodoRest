@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'apps.base',
     'apps.todo',
     'apps.accounts',
+    'apps.products'
 ]
 
 MIDDLEWARE = [
@@ -168,6 +169,11 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         # 'rest_framework.authentication.TokenAuthentication',
     ],
+
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+        ],
 }
     
 

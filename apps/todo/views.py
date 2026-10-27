@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 
-from apps.todo.serializers import CategoryListSerializer, CategoryCreateSerializer, CategoryUpdateSerializer
+from apps.todo.serializers import CategoryListSerializer, CategoryCreateSerializer, CategoryUpdateSerializer, TaskListSerializer
 from apps.todo.models import Category, Task
 
 
@@ -120,6 +120,14 @@ class CategoryUpdateAPIView(UpdateAPIView):
 
 class CategoryDestroyAPIView(DestroyAPIView):
     queryset = Category.objects.all()
+
+
+
+
+class TaskListAPIView(ListAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskListSerializer
+
 
 
         

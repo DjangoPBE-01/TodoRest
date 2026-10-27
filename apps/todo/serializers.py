@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apps.todo.models import Category
+from apps.todo.models import Category, Task
 
 
 class CategoryListSerializer(serializers.ModelSerializer):
@@ -16,3 +16,13 @@ class CategoryUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ('name',)
+
+
+
+class TaskListSerializer(serializers.ModelSerializer):
+
+    category = CategoryListSerializer(read_only=True)
+
+    class Meta:
+        model = Task
+        fields = "__all__"
