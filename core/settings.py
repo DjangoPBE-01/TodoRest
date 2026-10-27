@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -180,7 +181,7 @@ REST_FRAMEWORK = {
 
 from datetime import timedelta
 
-ACCESS_TOKEN_LIFETIME_MINUTES = 1
+ACCESS_TOKEN_LIFETIME_MINUTES = 60
 REFRESH_TOKEN_LIFETIME_DAYS = 7
 
 SIMPLE_JWT = {
@@ -206,3 +207,7 @@ FRONTEND_URL = os.getenv(
     "FRONTEND_URL",
     "http://localhost:3000",
 )
+
+
+
+from .jazzmin_conf import JAZZMIN_SETTINGS # noqa

@@ -12,7 +12,12 @@ from apps.todo.views import (
     CategoryRetrieveAPIView,
     CategoryUpdateAPIView,
     CategoryDestroyAPIView,
-    TaskListAPIView
+
+    TaskListAPIView,
+
+    
+    ExampleView21
+
     )
 
 urlpatterns = [
@@ -30,8 +35,13 @@ urlpatterns = [
     urls.path('category-update/<int:pk>/', CategoryUpdateAPIView.as_view(), name='category-update'),    
     urls.path('category-destroy/<int:pk>/', CategoryDestroyAPIView.as_view(), name='category-destroy'),
 
-
     urls.path('task-list/', TaskListAPIView.as_view(), name='task-list'),
+
+    
+    
+    urls.path('example_get/',ExampleView21.as_view(), name='example-get'),
+    
+    
 
 ]
 
