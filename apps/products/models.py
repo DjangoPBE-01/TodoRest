@@ -53,8 +53,9 @@ class Article(models.Model):
         on_delete=models.RESTRICT,
         related_name="articles",
     )
-    description = models.TextField()
-    photo = models.ImageField()
+    description = models.TextField(null=True, blank=True)
+    photo = models.ImageField(upload_to="articles/", null=True, blank=True)
+    is_active = models.BooleanField(default=True)
     
     created_at = models.DateTimeField(auto_now_add=True)
     

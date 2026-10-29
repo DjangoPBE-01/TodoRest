@@ -55,6 +55,7 @@ class RegisterUser(CreateAPIView):
         send_mail(subject, message, from_email, recipient_list)
 
 class ConfirmEmailView(APIView):
+    permission_classes = []
     def get(self, request, pk):
         try:
             user = User.objects.get(id=pk)

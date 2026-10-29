@@ -19,7 +19,6 @@ from apps.todo.models import Category, Task
 # Create your views here.
 
 class CategoryView(views.APIView):
-    permission_classes = [IsAuthenticated]
     def get(self, request):
         categories = Category.objects.all()
         serializer = CategoryListSerializer(categories, many=True)
